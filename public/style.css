@@ -853,3 +853,148 @@ textarea { resize: vertical; min-height: 80px; }
 .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
 .field-wide { grid-column: span 1; }
 .field-full { grid-column: span 2; }
+
+/* ─── Brand: smaller size for longer name ─────────────── */
+.topbar-brand {
+  font-size: 1rem;
+  letter-spacing: 2px;
+}
+
+/* ─── Not-Found State ─────────────────────────────────── */
+.not-found-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 56px 32px;
+  gap: 0;
+}
+
+.not-found-icon {
+  font-size: 3.6rem;
+  color: var(--text-dim);
+  opacity: .35;
+  line-height: 1;
+  margin-bottom: 20px;
+  font-family: var(--font-mono);
+}
+
+.not-found-title {
+  font-family: var(--font-head);
+  font-size: 2.8rem;
+  letter-spacing: 5px;
+  color: var(--text-hi);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.not-found-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 2px;
+  color: var(--accent);
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.nf-sep { color: var(--text-dim); font-size: 1rem; }
+
+.not-found-sub {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  line-height: 1.8;
+  max-width: 420px;
+  margin-bottom: 8px;
+}
+
+.not-found-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ─── History: Not-Found card ─────────────────────────── */
+.history-not-found { border-left-color: var(--text-dim) !important; opacity: .75; }
+
+.badge-not-found { background: rgba(90,112,144,.15); color: var(--text-dim); }
+
+/* ─── Register overlay ────────────────────────────────── */
+.register-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8,11,15,.88);
+  backdrop-filter: blur(12px);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.register-overlay.hidden { display: none; }
+
+.register-overlay-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--green);
+  padding: 48px 40px;
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+  animation: slide-up .3s ease both;
+}
+
+.overlay-check { font-size: 2.4rem; color: var(--green); margin-bottom: 16px; font-family: var(--font-mono); }
+.overlay-title { font-family: var(--font-head); font-size: 2rem; letter-spacing: 4px; text-transform: uppercase; color: var(--text-hi); margin-bottom: 10px; }
+.overlay-id    { font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent); letter-spacing: 2px; margin-bottom: 6px; }
+.overlay-sub   { font-family: var(--font-mono); font-size: 0.72rem; color: var(--text-dim); letter-spacing: 1px; }
+
+/* ─── Register section labels ─────────────────────────── */
+.register-section-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  padding: 10px 0 6px;
+  border-top: 1px solid var(--border);
+  margin-top: 20px;
+}
+
+.register-section-label:first-of-type { border-top: none; margin-top: 0; }
+.register-section-num { font-family: var(--font-head); font-size: 1rem; color: var(--accent); letter-spacing: 2px; }
+.register-section-req { margin-left: auto; color: var(--red); font-size: 0.6rem; letter-spacing: 2px; }
+.register-section-opt { margin-left: auto; color: var(--text-dim); font-size: 0.6rem; letter-spacing: 2px; }
+
+/* ─── Field grid (register form) ──────────────────────── */
+.field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; }
+.field-wide { grid-column: span 1; }
+.field-full { grid-column: span 2; }
+
+/* ─── Clear History button ────────────────────────────── */
+.btn-clear-history {
+  background: transparent;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  font-size: 0.7rem;
+  padding: 10px 18px;
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+  transition: all .2s;
+  white-space: nowrap;
+}
+
+.btn-clear-history:hover {
+  border-color: var(--red);
+  color: var(--red);
+  background: rgba(255,45,85,.06);
+  box-shadow: 0 0 16px rgba(255,45,85,.15);
+}

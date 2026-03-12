@@ -123,6 +123,12 @@ app.get('/api/reports', (req, res) => {
   res.json(history);
 });
 
+
+// DELETE /api/reports — clear all history
+app.delete('/api/reports', (req, res) => {
+  writeJson('history.json', []);
+  res.json({ success: true });
+});
 // POST /api/persons
 // Frontend sends: { name, dob, gender, address, ids: { Aadhaar, PAN, DL, Passport } }
 app.post('/api/persons', (req, res) => {
@@ -169,5 +175,5 @@ app.post('/api/persons', (req, res) => {
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
+  console.log(`VERISYS server listening on port ${port}`);
 });

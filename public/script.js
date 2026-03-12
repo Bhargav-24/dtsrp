@@ -261,6 +261,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+
+  // ── Clear history button ───────────────────────────
+  const clearBtn = document.getElementById('clear-history-btn');
+  if (clearBtn) {
+    clearBtn.addEventListener('click', async () => {
+      if (!confirm('Clear all report history? This cannot be undone.')) return;
+      clearBtn.disabled = true;
+      clearBtn.textContent = 'Clearing...'; 
+      await fetch('/api/reports', { method: 'DELETE' });
+      const hc = document.getElementById('history-container');
+      if (hc) hc.innerHTML = `<div style="padding:48px 0;text-align:center;font-family:var(--font-mono);font-size:.78rem;color:var(--text-dim);letter-spacing:2px;text-transform:uppercase;">No reports yet</div>`;
+      clearBtn.disabled = false;
+      clearBtn.textContent = '⊘ Clear History';
+    });
+  }
   // ── Registration page ────────────────────────────────
   if (regBtn) {
     regBtn.addEventListener('click', async () => {
