@@ -3,17 +3,37 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>History</title>
+  <title>Report History · ID Fraud Detection Engine</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>Report History</h1>
-    <div class="nav">
-      <a href="index.html">Home</a>
+
+  <nav class="topbar">
+    <a href="index.html" class="topbar-brand"><span>ID FRAUD DETECTION ENGINE</span></a>
+    <div class="topbar-nav">
+      <a href="index.html">Dashboard</a>
+      <a href="register.html">Register</a>
+      <a href="history.html" class="active">History</a>
     </div>
-    <div id="history-container"></div>
+  </nav>
+
+  <div class="page">
+    <div class="page-header">
+      <div class="page-eyebrow">Audit Log</div>
+      <h1 class="page-title">Report History</h1>
+    </div>
+
+    <div class="history-header">
+      <span>Timestamp</span>
+      <span>Report ID</span>
+      <span>ID Type</span>
+      <span>Score</span>
+      <span>Decision</span>
+    </div>
+
+    <div class="history-grid" id="history-container"></div>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>

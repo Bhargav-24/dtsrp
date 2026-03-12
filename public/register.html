@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register Person · ID Fraud Detection Engine</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <nav class="topbar">
+    <a href="index.html" class="topbar-brand"><span>ID FRAUD DETECTION ENGINE</span></a>
+    <div class="topbar-nav">
+      <a href="index.html">Dashboard</a>
+      <a href="register.html" class="active">Register</a>
+      <a href="history.html">History</a>
+    </div>
+  </nav>
+
+  <div class="page">
+    <div class="page-header">
+      <div class="page-eyebrow">Person Enrollment</div>
+      <h1 class="page-title">Register Person</h1>
+    </div>
+
+    <!-- 01: Core Identity -->
+    <div class="register-section-label">
+      <span class="register-section-num">01</span>
+      Core Identity
+      <span class="register-section-req">Required</span>
+    </div>
+    <div class="panel" style="margin-bottom:2px">
+      <div class="field-grid">
+        <div class="field field-wide">
+          <label>Full Name</label>
+          <input type="text" id="reg-name" placeholder="Alice Johnson" required />
+        </div>
+        <div class="field">
+          <label>Date of Birth</label>
+          <input type="date" id="reg-dob" required />
+        </div>
+        <div class="field">
+          <label>Gender</label>
+          <select id="reg-gender" required>
+            <option value="" disabled selected>— Select —</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+            <option value="Prefer not to say">Prefer not to say</option>
+          </select>
+        </div>
+        <div class="field field-full">
+          <label>Address</label>
+          <input type="text" id="reg-address" placeholder="123 Maple Street, Mumbai" required />
+        </div>
+      </div>
+    </div>
+
+    <!-- 02: Aadhaar -->
+    <div class="register-section-label">
+      <span class="register-section-num">02</span>
+      Aadhaar
+      <span class="register-section-req">Required</span>
+    </div>
+    <div class="panel" style="margin-bottom:2px">
+      <div class="field">
+        <label>Aadhaar Number</label>
+        <input type="text" id="reg-aadhaar" placeholder="1111 2222 3333" required maxlength="14" style="max-width:380px" />
+      </div>
+    </div>
+
+    <!-- 03: PAN -->
+    <div class="register-section-label">
+      <span class="register-section-num">03</span>
+      PAN Card
+      <span class="register-section-opt">Optional</span>
+    </div>
+    <div class="panel" style="margin-bottom:2px">
+      <div class="field">
+        <label>PAN Number</label>
+        <input type="text" id="reg-pan" placeholder="AJYPC1234L" maxlength="10" style="max-width:280px" />
+      </div>
+    </div>
+
+    <!-- 04: Driver's License -->
+    <div class="register-section-label">
+      <span class="register-section-num">04</span>
+      Driver's License
+      <span class="register-section-opt">Optional</span>
+    </div>
+    <div class="panel" style="margin-bottom:2px">
+      <div class="field">
+        <label>DL Number</label>
+        <input type="text" id="reg-dl" placeholder="MH0420150000001" style="max-width:320px" />
+      </div>
+    </div>
+
+    <!-- 05: Passport -->
+    <div class="register-section-label">
+      <span class="register-section-num">05</span>
+      Passport
+      <span class="register-section-opt">Optional</span>
+    </div>
+    <div class="panel" style="margin-bottom:28px">
+      <div class="field">
+        <label>Passport Number</label>
+        <input type="text" id="reg-passport" placeholder="M1234567" style="max-width:240px" />
+      </div>
+    </div>
+
+    <!-- Submit panel -->
+    <div class="panel" style="padding:24px 32px">
+      <button id="register-btn" class="btn btn-primary" style="margin-top:0">
+        Enroll Person →
+      </button>
+      <div id="register-result"></div>
+    </div>
+  </div>
+
+  <!-- Success overlay -->
+  <div id="register-overlay" class="register-overlay hidden">
+    <div class="register-overlay-box">
+      <div class="overlay-check">✓</div>
+      <div class="overlay-title">Person Enrolled</div>
+      <div class="overlay-id" id="overlay-person-id"></div>
+      <div class="overlay-sub">Record saved to database.</div>
+      <div style="display:flex;gap:10px;margin-top:28px">
+        <a href="register.html" class="btn btn-primary" style="margin-top:0;flex:1;justify-content:center">Register Another</a>
+        <a href="index.html"    class="btn"             style="margin-top:0;flex:1;justify-content:center;border:1px solid var(--border);background:var(--surface2);color:var(--text)">Dashboard</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

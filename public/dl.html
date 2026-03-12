@@ -3,35 +3,56 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Driver's License Verification</title>
+  <title>Driver's License Verification · ID Fraud Detection Engine</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>Driver's License Verification</h1>
-    <div class="nav">
-      <a href="index.html">Home</a>
+
+  <nav class="topbar">
+    <a href="index.html" class="topbar-brand"><span>ID FRAUD DETECTION ENGINE</span></a>
+    <div class="topbar-nav">
+      <a href="index.html">Dashboard</a>
+      <a href="register.html">Register</a>
       <a href="history.html">History</a>
     </div>
-    <form id="verify-form">
-      <input type="hidden" name="idType" value="DL" />
+  </nav>
 
-      <label>DL Number</label>
-      <input type="text" name="idValue" required placeholder="MH0420150000001" />
+  <div class="page">
+    <div class="page-header">
+      <div class="page-eyebrow">03 · Driver's License · Ministry of Transport</div>
+      <h1 class="page-title">DL Verify</h1>
+    </div>
 
-      <label>Name</label>
-      <input type="text" name="name" placeholder="Bob Singh" />
+    <div class="panel">
+      <form id="verify-form">
+        <input type="hidden" name="idType" value="DL" />
 
-      <label>Date of Birth</label>
-      <input type="date" name="dob" />
+        <div class="field">
+          <label>DL Number</label>
+          <input type="text" name="idValue" required placeholder="MH0420150000001" />
+        </div>
 
-      <label>Address</label>
-      <input type="text" name="address" placeholder="456 Oak Avenue" />
+        <div class="field">
+          <label>Full Name</label>
+          <input type="text" name="name" placeholder="Bob Singh" />
+        </div>
 
-      <button type="submit" class="big-button">Verify</button>
-    </form>
-    <div id="result"></div>
+        <div class="field">
+          <label>Date of Birth</label>
+          <input type="date" name="dob" />
+        </div>
+
+        <div class="field">
+          <label>Registered Address</label>
+          <input type="text" name="address" placeholder="456 Oak Avenue" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Run Verification →</button>
+      </form>
+      <div id="result"></div>
+    </div>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>

@@ -3,35 +3,56 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aadhaar Verification</title>
+  <title>Aadhaar Verification · ID Fraud Detection Engine</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>Aadhaar Verification</h1>
-    <div class="nav">
-      <a href="index.html">Home</a>
+
+  <nav class="topbar">
+    <a href="index.html" class="topbar-brand"><span>ID FRAUD DETECTION ENGINE</span></a>
+    <div class="topbar-nav">
+      <a href="index.html">Dashboard</a>
+      <a href="register.html">Register</a>
       <a href="history.html">History</a>
     </div>
-    <form id="verify-form">
-      <input type="hidden" name="idType" value="Aadhaar" />
+  </nav>
 
-      <label>Aadhaar Number</label>
-      <input type="text" name="idValue" required placeholder="111122223333" />
+  <div class="page">
+    <div class="page-header">
+      <div class="page-eyebrow">01 · Aadhaar · UIDAI</div>
+      <h1 class="page-title">Aadhaar Verify</h1>
+    </div>
 
-      <label>Name</label>
-      <input type="text" name="name" placeholder="Alice Johnson" />
+    <div class="panel">
+      <form id="verify-form">
+        <input type="hidden" name="idType" value="Aadhaar" />
 
-      <label>Date of Birth</label>
-      <input type="date" name="dob" />
+        <div class="field">
+          <label>Aadhaar Number</label>
+          <input type="text" name="idValue" required placeholder="1111 2222 3333" />
+        </div>
 
-      <label>Address</label>
-      <input type="text" name="address" placeholder="123 Maple Street" />
+        <div class="field">
+          <label>Full Name</label>
+          <input type="text" name="name" placeholder="Alice Johnson" />
+        </div>
 
-      <button type="submit" class="big-button">Verify</button>
-    </form>
-    <div id="result"></div>
+        <div class="field">
+          <label>Date of Birth</label>
+          <input type="date" name="dob" />
+        </div>
+
+        <div class="field">
+          <label>Registered Address</label>
+          <input type="text" name="address" placeholder="123 Maple Street" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Run Verification →</button>
+      </form>
+      <div id="result"></div>
+    </div>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>

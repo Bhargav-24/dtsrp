@@ -3,19 +3,49 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ID Verification</title>
+  <title>ID Fraud Detection Engine</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="container">
-    <h1>ID Verification</h1>
-    <div class="nav">
-      <a href="aadhaar.html">Aadhaar</a>
-      <a href="pan.html">PAN</a>
-      <a href="dl.html">Driver's License</a>
-      <a href="passport.html">Passport</a>
+
+  <nav class="topbar">
+    <a href="index.html" class="topbar-brand"><span>ID FRAUD DETECTION ENGINE</span></a>
+    <div class="topbar-nav">
+      <a href="index.html" class="active">Dashboard</a>
+      <a href="register.html">Register</a>
       <a href="history.html">History</a>
     </div>
+  </nav>
+
+  <div class="page">
+    <div class="page-header">
+      <div class="page-eyebrow">Identity Verification Platform</div>
+      <h1 class="page-title">Select ID Type</h1>
+    </div>
+
+    <div class="id-grid">
+      <a href="aadhaar.html" class="id-card">
+        <div class="id-card-num">01</div>
+        <div class="id-card-title">Aadhaar</div>
+        <div class="id-card-desc">12-digit UID · UIDAI</div>
+      </a>
+      <a href="pan.html" class="id-card">
+        <div class="id-card-num">02</div>
+        <div class="id-card-title">PAN</div>
+        <div class="id-card-desc">Permanent Account Number · Income Tax</div>
+      </a>
+      <a href="dl.html" class="id-card">
+        <div class="id-card-num">03</div>
+        <div class="id-card-title">Driver's License</div>
+        <div class="id-card-desc">State-issued DL · Ministry of Transport</div>
+      </a>
+      <a href="passport.html" class="id-card">
+        <div class="id-card-num">04</div>
+        <div class="id-card-title">Passport</div>
+        <div class="id-card-desc">International Travel Document · MEA</div>
+      </a>
+    </div>
   </div>
+
 </body>
 </html>

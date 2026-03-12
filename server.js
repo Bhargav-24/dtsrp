@@ -10,7 +10,6 @@ const DATA_DIR = path.join(__dirname, 'data');
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// helper to read JSON file (returns array or object)
 function readJson(filename, defaultValue) {
   try {
     const content = fs.readFileSync(path.join(DATA_DIR, filename), 'utf8');
@@ -24,20 +23,16 @@ function writeJson(filename, data) {
   fs.writeFileSync(path.join(DATA_DIR, filename), JSON.stringify(data, null, 2));
 }
 
-// endpoint implementations
-
 // POST /api/verify
 app.post('/api/verify', (req, res) => {
   const { idType, idValue, providedFields, operatorId } = req.body;
   if (!idType || !idValue) {
     return res.status(400).json({ error: 'missing idType/idValue' });
   }
-  // operatorId is optional (login planned later)
 
   const people = readJson('people.json', []);
 
   let person = null;
-  // search by any linked ID matching type/value
   people.forEach(p => {
     if (p.ids && p.ids.some(i => i.type === idType && i.value === idValue)) {
       person = p;
@@ -48,18 +43,16 @@ app.post('/api/verify', (req, res) => {
   const reportId = uuidv4();
 
   let score = null;
-  // mismatches will be objects { field, expected, provided }
   let mismatches = [];
   let criminalEscalation = false;
+  const notFound = !person;
 
   if (person) {
-    // check criminal records
     if (person.criminalRecords && person.criminalRecords.some(r => r.status === 'active')) {
       criminalEscalation = true;
     }
 
     if (!criminalEscalation) {
-      // compute mismatches
       if (providedFields.name && person.name && providedFields.name.toLowerCase() !== person.name.toLowerCase()) {
         mismatches.push({ field: 'name', expected: person.name, provided: providedFields.name });
         score = (score === null ? 100 : score) - 30;
@@ -72,16 +65,12 @@ app.post('/api/verify', (req, res) => {
         mismatches.push({ field: 'address', expected: person.address, provided: providedFields.address });
         score = (score === null ? 100 : score) - 10;
       }
-      // photoHash intentionally ignored (removed from UI)
       if (score === null) score = 100;
       score = Math.max(0, Math.min(100, score));
     }
-  } else {
-    // no person found at all -> treat as max-risk
-    score = 0;
   }
+  // notFound → score stays null, no decision needed
 
-  // persist report in history
   const history = readJson('history.json', []);
   const entry = {
     reportId,
@@ -92,6 +81,7 @@ app.post('/api/verify', (req, res) => {
     score,
     mismatches,
     criminalEscalation,
+    notFound,
     operatorId: operatorId || null,
     operatorDecision: null,
     operatorReason: null,
@@ -119,7 +109,6 @@ app.post('/api/reports/:id/decision', (req, res) => {
   const history = readJson('history.json', []);
   const entry = history.find(e => e.reportId === id);
   if (!entry) return res.status(404).json({ error: 'not found' });
-  // record who made the decision
   entry.operatorId = operatorId || entry.operatorId;
   entry.operatorDecision = decision;
   entry.operatorReason = reason || null;
@@ -134,7 +123,50 @@ app.get('/api/reports', (req, res) => {
   res.json(history);
 });
 
-// start server
+// POST /api/persons
+// Frontend sends: { name, dob, gender, address, ids: { Aadhaar, PAN, DL, Passport } }
+app.post('/api/persons', (req, res) => {
+  const { name, dob, gender, address, ids: idsObj } = req.body;
+
+  if (!name || !dob || !address || !idsObj || !idsObj.Aadhaar) {
+    return res.status(400).json({ error: 'name, dob, address, and Aadhaar are required' });
+  }
+
+  const people = readJson('people.json', []);
+
+  // Check for duplicate Aadhaar
+  const cleanAadhaar = idsObj.Aadhaar.replace(/\s/g, '');
+  const duplicate = people.find(p =>
+    p.ids && p.ids.some(i => i.type === 'Aadhaar' && i.value === cleanAadhaar)
+  );
+  if (duplicate) {
+    return res.status(409).json({ error: 'A person with this Aadhaar number is already registered.' });
+  }
+
+  const personId = 'person-' + Date.now();
+
+  const ids = [{ type: 'Aadhaar', value: cleanAadhaar }];
+  if (idsObj.PAN)      ids.push({ type: 'PAN',      value: idsObj.PAN.toUpperCase() });
+  if (idsObj.DL)       ids.push({ type: 'DL',        value: idsObj.DL.toUpperCase() });
+  if (idsObj.Passport) ids.push({ type: 'Passport',  value: idsObj.Passport.toUpperCase() });
+
+  const person = {
+    id: personId,
+    name,
+    dob,
+    gender: gender || null,
+    address,
+    photoHash: null,
+    ids,
+    criminalRecords: []
+  };
+
+  people.push(person);
+  writeJson('people.json', people);
+
+  res.json({ success: true, personId });
+});
+
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server listening on port ${port}`);
