@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aadhaar Verification</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Aadhaar Verification</h1>
+    <div class="nav">
+      <a href="index.html">Home</a>
+      <a href="history.html">History</a>
+    </div>
+    <form id="verify-form">
+      <input type="hidden" name="idType" value="Aadhaar" />
+
+      <label>Aadhaar Number</label>
+      <input type="text" name="idValue" required placeholder="111122223333" />
+
+      <label>Name</label>
+      <input type="text" name="name" placeholder="Alice Johnson" />
+
+      <label>Date of Birth</label>
+      <input type="date" name="dob" />
+
+      <label>Address</label>
+      <input type="text" name="address" placeholder="123 Maple Street" />
+
+      <button type="submit" class="big-button">Verify</button>
+    </form>
+    <div id="result"></div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
