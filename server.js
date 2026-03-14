@@ -32,9 +32,16 @@ app.post('/api/verify', (req, res) => {
 
   const people = readJson('people.json', []);
 
+  let normalizedValue = idValue;
+  if (idType === 'Aadhaar') {
+    normalizedValue = idValue.replace(/\s/g, '');
+  } else if (['PAN', 'DL', 'Passport'].includes(idType)) {
+    normalizedValue = idValue.toUpperCase();
+  }
+
   let person = null;
   people.forEach(p => {
-    if (p.ids && p.ids.some(i => i.type === idType && i.value === idValue)) {
+    if (p.ids && p.ids.some(i => i.type === idType && i.value === normalizedValue)) {
       person = p;
     }
   });
@@ -123,12 +130,6 @@ app.get('/api/reports', (req, res) => {
   res.json(history);
 });
 
-
-// DELETE /api/reports — clear all history
-app.delete('/api/reports', (req, res) => {
-  writeJson('history.json', []);
-  res.json({ success: true });
-});
 // POST /api/persons
 // Frontend sends: { name, dob, gender, address, ids: { Aadhaar, PAN, DL, Passport } }
 app.post('/api/persons', (req, res) => {
@@ -175,5 +176,5 @@ app.post('/api/persons', (req, res) => {
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
-  console.log(`VERISYS server listening on port ${port}`);
+  console.log(`Server listening on port ${port}`);
 });
