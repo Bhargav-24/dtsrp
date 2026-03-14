@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
     doc.appendChild(decisionSection);
     container.appendChild(doc);
   }
-
+  
   // ── Verify form ──────────────────────────────────────
   if (form) {
     form.addEventListener('submit', async e => {
